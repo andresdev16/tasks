@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="SharedKernel.Application" Version="7.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Andres.Satrack.Test.Domain\Andres.Satrack.Test.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
