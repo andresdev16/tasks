@@ -12,17 +12,19 @@ namespace Andres.Satrack.Test.Domain.Aggregates.TaskAggregate
         public string Name { get; set; }
         public string Category { get; set; }
         public DateTime LimitDate { get; set; }
+        public bool Completed { get; set; }
 
-        private Task(string name, string category, DateTime limitDate)
+        private Task(string name, string category, DateTime limitDate, bool completed)
         {
             Name = name;
             Category = category;
             LimitDate = limitDate;
+            Completed = completed;
         }
 
         public static Task Create(string name, string category, DateTime limitDate)
         {
-            var task = new Task(name, category, limitDate);
+            var task = new Task(name, category, limitDate, false);
 
             return task;
         }
@@ -32,6 +34,11 @@ namespace Andres.Satrack.Test.Domain.Aggregates.TaskAggregate
             Name = name;
             Category = category;
             LimitDate = limitDate;
+        }
+
+        public void Finish()
+        {
+            Completed = true;
         }
     }
 }

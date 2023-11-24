@@ -72,5 +72,15 @@ namespace Andres.Satrack.Test.Api.Controllers
                 ? NoContent()
                 : BadRequest();
         }
+
+        [HttpPut("finish")]
+        public async Task<IActionResult> FinishTaskAsync(FinishTaskCommand command, CancellationToken cancellationToken)
+        {
+            bool success = await sender.SendAsync(command, cancellationToken);
+
+            return success
+                ? NoContent()
+                : BadRequest();
+        }
     }
 }

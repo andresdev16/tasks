@@ -18,6 +18,7 @@ namespace Andres.Satrack.Test.Infrastructure.Persistence.Configurations
             builder.Property(t => t.Name);
             builder.Property(t => t.Category);
             builder.Property(t => t.LimitDate);
+            builder.Property(t => t.Completed);
         }
     }
 }
