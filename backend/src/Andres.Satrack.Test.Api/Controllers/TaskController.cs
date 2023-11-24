@@ -21,7 +21,7 @@ namespace Andres.Satrack.Test.Api.Controllers
             this.queries = queries;
         }
 
-        [HttpGet("all:{offset:int}:{limit:int}")]
+        [HttpGet("all/{offset:int}:{limit:int}")]
         [ActionName(nameof(GetSummaryAsync))]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
