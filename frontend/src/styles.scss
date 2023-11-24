@@ -1,1 +1,72 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+//@import './assets/styles/styles-form.scss';
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+  @apply bg-gray-300 opacity-60 blur-sm;
+}
+
+.invalid-input {
+  @apply border-red-500;
+}
+
+.form-error {
+  @apply text-sm text-red-500 ml-4;
+}
+
+.form-disabled {
+  opacity: 0.6;
+}
+
+@layer base {
+  [type="text"],
+  [type="email"],
+  [type="url"],
+  [type="password"],
+  [type="number"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="week"],
+  [multiple],
+  textarea,
+  select {
+    @apply w-80 outline-none rounded-3xl  border-2 border-gray-300 text-gray-900 p-3 text-xs placeholder-gray-400 focus:z-10 focus:border-teal-400;
+
+    &:disabled {
+      @apply opacity-60;
+    }
+  }
+
+  label {
+    @apply top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary-500;
+  }
+
+  [type="checkbox"],
+  [type="radio"] {
+    @apply h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500;
+  }
+}
+
+tr.mat-mdc-row.mdc-data-table__row.cdk-row {
+  height: 2.8rem;
+  &:nth-child(even) {
+    background-color: #ededed;
+  }
+}
+.mat-mdc-cell.mdc-data-table__cell.cdk-cell {
+  border-bottom-width: 0;
+}
