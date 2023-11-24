@@ -7,5 +7,11 @@ using System.Threading.Tasks;
 
 namespace Andres.Satrack.Test.Application.Queries
 {
-    public record GetTaskSummaryQuery(int Limit, int Offset) : IQueryRequest<IEnumerable<Domain.Aggregates.TaskAggregate.Task>>;
+    public record GetTaskSummaryQuery(int Limit, int Offset) : IQueryRequest<Summary>;
+
+    public class Summary
+    {
+        public IEnumerable<Domain.Aggregates.TaskAggregate.Task>? Tasks { get; set; }
+        public int Total { get; set; } = 0;
+    }
 }

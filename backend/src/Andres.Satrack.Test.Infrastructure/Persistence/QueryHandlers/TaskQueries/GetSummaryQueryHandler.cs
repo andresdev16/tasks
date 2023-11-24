@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Andres.Satrack.Test.Infrastructure.Persistence.QueryHandlers.TaskQueries
 {
-    internal class GetSummaryQueryHandler : IQueryRequestHandler<GetTaskSummaryQuery, IEnumerable<Domain.Aggregates.TaskAggregate.Task>>
+    internal class GetSummaryQueryHandler : IQueryRequestHandler<GetTaskSummaryQuery, Summary>
     {
         private readonly EntityFrameworkCoreQueryProvider<TaskContext> queryProvider;
 
@@ -20,9 +20,12 @@ namespace Andres.Satrack.Test.Infrastructure.Persistence.QueryHandlers.TaskQueri
             this.queryProvider = queryProvider;
         }
 
-        public async Task<IEnumerable<Domain.Aggregates.TaskAggregate.Task>> Handle(GetTaskSummaryQuery query, CancellationToken cancellationToken)
+        public async Task<Summary> Handle(GetTaskSummaryQuery query, CancellationToken cancellationToken)
         {
-            return await queryProvider.GetQuery<Domain.Aggregates.TaskAggregate.Task>().Skip(query.Offset).Take(query.Limit).ToListAsync(cancellationToken);
+            var tasks = await queryProvider.GetQuery<Domain.Aggregates.TaskAggregate.Task>().Skip(query.Offset).Take(query.Limit).ToListAsync(cancellationToken);
+            int total = await queryProvider.GetQuery<Domain.Aggregates.TaskAggregate.Task>().CountAsync();
+
+            return new Summary { Tasks = tasks, Total = total };
         }
     }
 }
