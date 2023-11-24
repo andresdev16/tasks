@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Andres.Satrack.Test.Infrastructure.Persistence.QueryHandlers.TaskQueries
 {
-    internal class GetSummaryQueryHandler : IQueryRequestHandler<GetTaskSummaryQuery, IEnumerable<Task>>
+    internal class GetSummaryQueryHandler : IQueryRequestHandler<GetTaskSummaryQuery, IEnumerable<Domain.Aggregates.TaskAggregate.Task>>
     {
         private readonly EntityFrameworkCoreQueryProvider<TaskContext> queryProvider;
 
@@ -20,9 +20,9 @@ namespace Andres.Satrack.Test.Infrastructure.Persistence.QueryHandlers.TaskQueri
             this.queryProvider = queryProvider;
         }
 
-        public async Task<IEnumerable<Task>> Handle(GetTaskSummaryQuery query, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Domain.Aggregates.TaskAggregate.Task>> Handle(GetTaskSummaryQuery query, CancellationToken cancellationToken)
         {
-            return await queryProvider.GetQuery<Task>().Skip(query.Offset).Take(query.Limit).ToListAsync(cancellationToken);
+            return await queryProvider.GetQuery<Domain.Aggregates.TaskAggregate.Task>().Skip(query.Offset).Take(query.Limit).ToListAsync(cancellationToken);
         }
     }
 }

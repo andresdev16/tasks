@@ -59,14 +59,14 @@ namespace Andres.Satrack.Test.Api.Controllers
                 : BadRequest();
         }
 
-        [HttpDelete()]
+        [HttpDelete("{id}")]
         [ActionName(nameof(DeleteTaskAsync))]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> DeleteTaskAsync(DeleteTaskCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteTaskAsync(Guid id, CancellationToken cancellationToken)
         {
-            bool success = await sender.SendAsync(command, cancellationToken);
+            bool success = await sender.SendAsync(new DeleteTaskCommand(id), cancellationToken);
 
             return success
                 ? NoContent()
