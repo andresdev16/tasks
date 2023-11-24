@@ -20,7 +20,7 @@ namespace Andres.Satrack.Test.Application.Commands.TaskCommands
 
         public async Task<Guid> HandleAsync(AddTaskCommand command, CancellationToken cancellationToken)
         {
-            var task = Domain.Aggregates.TaskAggregate.Task.Create(command.Name, command.Category, command.LimitDate);
+            var task = Domain.Aggregates.TaskAggregate.Task.Create(command.Name, command.Category.ToLower(), command.LimitDate);
 
             taskRepository.Add(task);
 
